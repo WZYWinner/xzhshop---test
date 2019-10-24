@@ -26,7 +26,7 @@
 				<div class="goods-font">网络类型<span class="leixing" @click="choose" :class="{goodsActive : active === true}">4G+全网通</span></div>
 				<div style="display:flex;margin-top:30px;">
 					<div class="goods-font">机身颜色</div>
-					<div class="jishen" v-for="(index,goods) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
+					<div class="jishen" v-for="(goods,index) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
 						<img :src="goods.img" alt="">
 						{{goods.name}}
 					</div>
@@ -39,10 +39,18 @@
 						<button @click="add">+</button>
 						</div>
 					</div>
-					<button class="pay">立即购买</button>
+					<button class="pay" @click="pay">立即购买</button>
 			</div>
 			</div>
-			<div class="jiesuan"></div>
+			<div class="jiesuan" v-show="isLock">
+						<div class="success">
+							<div class="tishi">
+								<img src="../assets/img/pay_success.png" alt="">
+								<span>购买成功</span>
+							</div>
+						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
+						</div>
+					</div>
 			<div class="bottom">
 				<div class="bottom_left">
 					<div class="hot_title">店铺热销</div>
@@ -70,6 +78,7 @@ export default {
 	name: 'GoodsDetail',
 	data () {
 		return {
+			isLock: false,
 			jishen: 0,
 			title: '【5G新品 现货顺丰速发】Samsung/三星Galaxy Note10+ SM-N9760 5G 骁龙855 IP68防水 全网通5G智能手机 plus',
 			advantage: '享8选2好礼 延保一年 12期免息',
@@ -140,6 +149,12 @@ export default {
   ready () {
   },
 	methods: {
+		pay: function () {
+			this.isLock = true
+		},
+		quxiao: function () {
+			this.isLock = false
+		},
 		add: function () {
 			this.num = ++this.num
 		},
@@ -381,5 +396,44 @@ export default {
 .bottom_right_img img{
 	width: 100%;
 	height: 100%;
+}
+.jiesuan{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.success{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	width: 250px;
+	height: 120px;
+	background: whitesmoke;
+	z-index: 99;
+	box-shadow: 0px 0px 5px #999;
+}
+.tishi{
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #3FA817;
+}
+.tishi span{
+	margin-left: 20px;
+	font-size: 20px;
+}
+.close{
+	position: absolute;
+	right: 3px;
+	top: 3px;
+}
+.close img{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
 }
 </style>

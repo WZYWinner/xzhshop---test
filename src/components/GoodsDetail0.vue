@@ -42,7 +42,7 @@
 
 					<button class="pay" @click="pay">立即购买</button>
 
-					<div class="jiesuan" v-show="isLock">
+					<!-- <div class="jiesuan" v-show="isLock">
 						<div class="success">
 							<div class="tishi">
 								<img src="../assets/img/pay_success.png" alt="">
@@ -50,10 +50,9 @@
 							</div>
 						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
 						</div>
-					</div>
+					</div> -->
 			</div>
 			</div>
-			<div class="jiesuan"></div>
 			<div class="bottom">
 				<div class="bottom_left">
 					<div class="hot_title">店铺热销</div>
@@ -81,6 +80,7 @@ export default {
 	name: 'GoodsDetail',
 	data () {
 		return {
+			name: '小米9 plus',
 			isLock: false,
 			jishen: 0,
 			title: '【咨询减450元】Xiaomi小米9手机Plus九9pro官方旗舰店cc9免息9se透明8尊享版mix4 3骁龙855红米K20官网note8',
@@ -156,7 +156,7 @@ export default {
 			this.num = ++this.num
 		},
 		pay: function () {
-			this.isLock = true
+			this.$router.push({name:'/payment',params: {img:this.phoneInfo[0].img,name:this.name,price:this.price,num:this.num}})
 		},
 		quxiao: function () {
 			this.isLock = false
@@ -404,7 +404,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	background: rgba(0,0,0,0.1);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 }

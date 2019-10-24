@@ -26,7 +26,7 @@
 				<div class="goods-font">套餐类型<span class="leixing" @click="choose" :class="{goodsActive : active === true}">i3-8145U/8G/256G 傲腾增强型 SSD</span></div>
 				<div style="display:flex;margin-top:30px;">
 					<div class="goods-font">机身颜色</div>
-					<div class="jishen" v-for="(index,goods) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
+					<div class="jishen" v-for="(goods,index) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
 						<img :src="goods.img" alt="">
 						{{goods.name}}
 					</div>
@@ -39,10 +39,18 @@
 						<button @click="add">+</button>
 						</div>
 					</div>
-					<button class="pay">立即购买</button>
+					<button class="pay" @click="pay">立即购买</button>
 			</div>
 			</div>
-			<div class="jiesuan"></div>
+			<div class="jiesuan" v-show="isLock">
+						<div class="success">
+							<div class="tishi">
+								<img src="../assets/img/pay_success.png" alt="">
+								<span>购买成功</span>
+							</div>
+						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
+						</div>
+					</div>
 			<div class="bottom">
 				<div class="bottom_left">
 					<div class="hot_title">店铺热销</div>
@@ -70,6 +78,7 @@ export default {
 	name: 'GoodsDetail',
 	data () {
 		return {
+			isLock: false,
 			jishen: 0,
 			title: '【店铺爆款】Lenovo/联想340C 英特尔酷睿i3 傲腾增强型SSD 15.6英寸轻薄本商务笔记本电脑',
 			advantage: '英特尔酷睿i3+256G 傲腾增强型SSD+大屏轻薄',
@@ -138,6 +147,12 @@ export default {
   ready () {
   },
 	methods: {
+		pay: function () {
+			this.isLock = true
+		},
+		quxiao: function () {
+			this.isLock = false
+		},
 		add: function () {
 			this.num = ++this.num
 		},
@@ -379,5 +394,44 @@ export default {
 .bottom_right_img img{
 	width: 100%;
 	height: 100%;
+}
+.jiesuan{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.success{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	width: 250px;
+	height: 120px;
+	background: whitesmoke;
+	z-index: 99;
+	box-shadow: 0px 0px 5px #999;
+}
+.tishi{
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #3FA817;
+}
+.tishi span{
+	margin-left: 20px;
+	font-size: 20px;
+}
+.close{
+	position: absolute;
+	right: 3px;
+	top: 3px;
+}
+.close img{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
 }
 </style>

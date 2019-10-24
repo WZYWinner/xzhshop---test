@@ -1,4 +1,12 @@
 <template>
+<div>
+  <div class="lunbo">
+	<el-carousel :interval="5000" arrow="always" height="460px">
+    <el-carousel-item v-for="item in banners" :key="item">
+      <img :src="item.imgUrl" alt="">
+    </el-carousel-item>
+  </el-carousel>
+	</div>
   <div class="boxs-container">
     <div class="boxs">
       <div class="boxs-top clearfix">
@@ -18,7 +26,7 @@
         </div>
         <div class="box-right">
           <ul class="box-list">
-            <li class="box-item" v-for="good in goods" @click="goto">
+            <li class="box-item" v-for="(good,index) in goods" @click="goto(good.sourceUrl)" :key="index">
               <span class="discount-label" :class="good.discountType">{{good.discount}}</span>
               <!-- <a :href="good.sourceUrl" target="_blank"> -->
                 <img :src="good.imgUrl" alt />
@@ -37,24 +45,31 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      banners: [
+				{sourceUrl: '//item.mi.com/buyphone/mi5', imgUrl: require('../assets/img/lunbo1.png')},
+				{sourceUrl: '//item.mi.com/buyphone/hongmi3s', imgUrl: require('../assets/img/lunbo2.png')},
+				{sourceUrl: '//item.mi.com/buyphone/mimax', imgUrl: require('../assets/img/lunbo3.png')},
+				{sourceUrl: '//item.mi.com/buymitv/48', imgUrl: require('../assets/img/lunbo4.png')}
+			],
       goods: [
         {
-          sourceUrl: "//item.mi.com/1161200059.html",
+          sourceUrl: "/goodsDetail0",
           imgUrl: "http://c1.mifile.cn/f/i/15/goods/nav/maxdingbu!160x110.jpg",
           title: "小米9 Plus",
           desc: "Xiaomi小米9手机Plus九9pro官方旗舰店cc9免息9se透明8尊享版mix4",
-          price: "2599",
+          price: "2649",
           discountType: "free",
           discount: "免邮费"
         },
         {
-          sourceUrl: "//www.mi.com/mibicycle/",
+          sourceUrl: "/goodsDetail1",
           imgUrl: "http://c1.mifile.cn/f/i/16/goods/nav/mi5!160x110.jpg",
           title: "华为nova 5 PRO",
           desc:
@@ -64,26 +79,25 @@ export default {
           discount: "新品"
         },
         {
-          sourceUrl: "//www.mi.com/mitu/",
+          sourceUrl: "/goodsDetail2",
           imgUrl: "http://c1.mifile.cn/f/i/15/goods/nav/mi4c!160x110.jpg",
           title: "三星Galaxy Note10",
           desc:
             "Samsung/三星Galaxy Note10+ SM-N9760 5G 骁龙855 IP68防水 全网通5G智能手机 plus",
-          price: "7999",
+          price: "7699",
           discountType: "new",
           discount: "新品"
         },
         {
-          sourceUrl: "//www.mi.com/water2/",
-          imgUrl:
-            "http://c1.mifile.cn/f/i/g/2015/cn-index/hongmipro-320!160x110.jpg",
+          sourceUrl: "/goodsDetail3",
+          imgUrl:require('../assets/img/mi_pingban/1.jpg'),
           title: "小米平板4 Plus",
           desc:
             "小米平板4Plus 平板电脑 10.1英寸大屏 安卓智能 AI人脸识别全高清超薄",
           price: "1849"
         },
         {
-          sourceUrl: "//www.mi.com/ihealth/ ",
+          sourceUrl: "/goodsDetail4",
           imgUrl: "http://c1.mifile.cn/f/i/15/goods/nav/mipad2-64!160x110.jpg",
           title: "三星平板 SM-T510",
           desc:
@@ -91,7 +105,7 @@ export default {
           price: "1399"
         },
         {
-          sourceUrl: "//www.mi.com/dianfanbao/",
+          sourceUrl: "/goodsDetail5",
           imgUrl:
             "http://c1.mifile.cn/f/i/g/2015/video/bijiben32012.5!160x110.jpg",
           title: "Lenovo/联想340C",
@@ -100,28 +114,28 @@ export default {
           price: "3499"
         },
         {
-          sourceUrl: "//item.mi.com/1163200015.html",
+          sourceUrl: "/goodsDetail6",
           imgUrl: "http://c1.mifile.cn/f/i/16/goods/nav/mitv3s-43!160x110.jpg",
-          title: "HTC电视3S 43英寸",
+          title: "Sony/索尼电视 KDL 32英寸",
           desc: "开启你的智能生活",
-          price: "1499",
-          oldPrice: "1825",
+          price: "3499",
+          oldPrice: "5299",
           discountType: "discount",
           discount: "享九折"
         },
         {
-          sourceUrl: "//list.mi.com/accessories/tag?id=guangganban",
-          imgUrl: "http://i1.mifile.cn/a1/T1HcAQBgDT1RXrhCrK!220x220.jpg",
-          title: "小米手环 光感版",
-          desc: "实时监测心率，科学运动",
-          price: "99"
+          sourceUrl: "/goodsDetail7",
+          imgUrl: require('../assets/img/whaley/1.jpg'),
+          title: "whaley/微鲸 65D2UA 65吋",
+          desc: "WUI智能电视系统",
+          price: "3399"
         }
       ]
     };
   },
   methods: {
-    goto () {
-      this.$router.push({path: '/goodsDetail0'})
+    goto (url) {
+      this.$router.push(url)
     }
   }
 };
@@ -232,11 +246,11 @@ export default {
   z-index: 4;
 }
 
-.discount-label .free {
+.discount-label.free {
   background-color: #ffac13;
 }
 
-.discount-label .new {
+.discount-label.new {
   background-color: #83c44e;
 }
 .discount-label.discount {
@@ -246,7 +260,7 @@ export default {
   color: #b0b0b0;
   text-decoration: line-through;
 }
-img {
+.box-right .box-item img {
   margin-top: 30px !important;
   display: block;
   width: 180px;
@@ -274,4 +288,13 @@ img {
   font-size: 14px;
   text-align: center;
 }
+.lunbo{
+		width: 1226px;
+		margin: 40px auto;
+    background: #fff;
+	}
+	.lunbo img{
+		width: 100%;
+		height: 100%;
+	}
 </style>
