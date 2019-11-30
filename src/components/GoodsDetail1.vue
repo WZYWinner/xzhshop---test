@@ -3,9 +3,9 @@
 	  <div class="top-bar">
 		  <div class="top-left">
 			  <ul>
-				 <li v-for="item in work" style="display:inline-block;font-size:15px;padding-left:15px;">
+				 <li v-for="(item,index) in work" :key="index" style="display:inline-block;font-size:15px;padding-left:15px;">
 					 <span>{{item.name}}</span>
-					 <span v-show="$index!=8">|</span>
+					 <span v-show="index!=8">|</span>
 				 </li>
 			  </ul>
 		  </div>
@@ -22,8 +22,8 @@
 					<div class="price">价格:</div>
 					<div class="price-num">¥ {{(price*num).toFixed(2)}}</div>
 				</div>
-				<div style="text-decoration:line-through;color: #999;"><div class="goods-font">运费:&nbsp&nbsp&nbsp<span style="color: #280;">免运费</span></div></div>
-				<div class="goods-font">网络类型<span class="leixing" @click="choose" :class="{goodsActive : active === true}">4G+全网通</span></div>
+				<div style="text-decoration:line-through;color: #999;"><div class="goods-font">运费:<span style="color: #280;margin-left:40px">免运费</span></div></div>
+				<div class="goods-font">网络类型<span class="leixing">4G+全网通</span></div>
 				<div style="display:flex;margin-top:30px;">
 					<div class="goods-font">机身颜色</div>
 					<div class="jishen" v-for="(goods,index) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
@@ -42,20 +42,11 @@
 					<button class="pay" @click="pay">立即购买</button>
 			</div>
 			</div>
-			<div class="jiesuan" v-show="isLock">
-						<div class="success">
-							<div class="tishi">
-								<img src="../assets/img/pay_success.png" alt="">
-								<span>购买成功</span>
-							</div>
-						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
-						</div>
-					</div>
 			<div class="bottom">
 				<div class="bottom_left">
 					<div class="hot_title">店铺热销</div>
 					<div class="shadow">
-					<div v-for="items in hot">
+					<div v-for="(items,index) in hot" :key="index">
 						<div class="hot_goods">
 						<div class="hot_goods_img"><img :src="items.img" alt=""></div>
 					</div>
@@ -64,8 +55,8 @@
 					</div>
 				</div>
 				<div class="bottom_right">
-					<div class="bottom_right_img" v-for="item in showImg">
-						<img :src="item" alt="">
+					<div class="bottom_right_img" v-for="(items,index) in showImg" :key="index">
+						<img :src="items" alt="">
 					</div>
 				</div>
 			</div>
@@ -78,6 +69,7 @@ export default {
 	name: 'GoodsDetail',
 	data () {
 		return {
+			name: '华为 nova 5 Pro',
 			isLock: false,
 			jishen: 0,
 			title: '直降300 Huawei/华为 nova 5 Pro 新款手机官方旗舰店5i官网降价5g全网通mate30智能手机p20正品4e',
@@ -150,7 +142,7 @@ export default {
   },
 	methods: {
 		pay: function () {
-			this.isLock = true
+			this.$router.push({name:'Payment',params: {img:this.phoneInfo[this.jishen].img,name:this.name,price:this.price,num:this.num}})
 		},
 		quxiao: function () {
 			this.isLock = false
@@ -288,7 +280,7 @@ export default {
     min-width: 10px;
     padding: 8px;
     text-align: center;
-    border: 1px solid #b8b7bd;
+    border: 2px solid #FF0036;
     color: #000;
     text-decoration: none;
 	cursor: pointer;

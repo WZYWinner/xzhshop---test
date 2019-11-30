@@ -2,7 +2,7 @@
 <div>
   <div class="lunbo">
 	<el-carousel :interval="5000" arrow="always" height="460px">
-    <el-carousel-item v-for="item in banners" :key="item">
+    <el-carousel-item v-for="(item,index) in banners" :key="index">
       <img :src="item.imgUrl" alt="">
     </el-carousel-item>
   </el-carousel>
@@ -20,7 +20,7 @@
       </div>
       <div class="boxs-content clearfix">
         <div class="box-left">
-          <a href="http://www.mi.com/scooter/" target="_blank">
+          <a>
             <img src="http://i3.mifile.cn/a4/124d82cc-cfce-44ab-b711-28b21be81683" alt />
           </a>
         </div>

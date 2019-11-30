@@ -8,17 +8,17 @@
           <li>宝贝名称</li>
           <li>单价</li>
           <li>数量</li>
-          <li>小计</li>
+          <li>总计</li>
         </ul>
       </div>
       <div class="info">
         <div class="goods-img">
-          <img src="../assets/img/mi/1_small.jpg" alt />
+          <img :src="goodsImg" alt />
         </div>
-        <div class="goods-name">小米9 plus</div>
-        <div class="single-price">2799.00</div>
-        <div class="num">3</div>
-        <div class="total">8888.00</div>
+        <div class="goods-name">{{goodsName}}</div>
+        <div class="single-price">{{singlePrice}}</div>
+        <div class="num">{{goodsNum}}</div>
+        <div class="total">{{(singlePrice*goodsNum).toFixed(2)}}</div>
       </div>
       <div class="userInfo">
         <div class="address">
@@ -67,6 +67,15 @@
       </div>
       <div class="confirm" @click="confirm"><span>确认订单</span></div>
     </div>
+    <div class="jiesuan" v-show="isLock1">
+						<div class="success">
+							<div class="tishi">
+								<img src="../assets/img/pay_success.png" alt="">
+								<span>购买成功</span>
+							</div>
+						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
+						</div>
+					</div>
   </div>
 </template>
 
@@ -74,6 +83,12 @@
 export default {
     data() {
       return {
+        isLock1: false,
+        goodsImg: '',
+        goodsName: '',
+        singlePrice: '',
+        goodsNum: '',
+        goodsTotal: '',
           isChoose: 1,
         isLock: false,
         province: '',
@@ -96,10 +111,16 @@ export default {
     },
     methods: {
         confirm: function() {
-            if(this.province===''||this.city===''||this.area===''||this.address===''||this.bianma===''||this.name===''||this.tel===''){
+            if(this.province===''||this.city===''||this.area===''||this.form.address===''||this.form.bianma===''||this.form.name===''||this.form.tel===''){
                 alert("信息未填写完整")
+            }else{
+              this.isLock1 = true
             }
         },
+        quxiao: function () {
+              this.isLock1 = false
+              this.$router.push('/')
+	    	},
         isChoose1: function() {
             this.isChoose = 1
             this.isLock = false
@@ -124,8 +145,13 @@ export default {
                 this.ruleForm.area = this.area;
             }
     },
-    onLoad(res){
-        console.log(res)
+    mounted(){
+        console.log(this.$route.params)
+        this.goodsImg=this.$route.params.img
+        this.goodsName=this.$route.params.name
+        this.singlePrice=this.$route.params.price
+        this.goodsNum=this.$route.params.num
+        console.log(this.goodsImg)
     }
   }
 </script>
@@ -238,5 +264,44 @@ export default {
     font-weight: 700;
     background: #dd2727;
     color: #fff;
+}
+.jiesuan{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.success{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	width: 250px;
+	height: 120px;
+	background: whitesmoke;
+	z-index: 99;
+	box-shadow: 0px 0px 5px #999;
+}
+.tishi{
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #3FA817;
+}
+.tishi span{
+	margin-left: 20px;
+	font-size: 20px;
+}
+.close{
+	position: absolute;
+	right: 3px;
+	top: 3px;
+}
+.close img{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
 }
 </style>

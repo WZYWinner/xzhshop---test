@@ -9,6 +9,8 @@ import GoodsDetail4 from '@/components/GoodsDetail4'
 import GoodsDetail5 from '@/components/GoodsDetail5'
 import GoodsDetail6 from '@/components/GoodsDetail6'
 import GoodsDetail7 from '@/components/GoodsDetail7'
+import Login from '@/components/Login'
+import Register from '@/components/Register'
 import Payment from '@/components/Payment'
 
 Vue.use(Router)
@@ -64,6 +66,19 @@ export default new Router({
       path: '/payment',
       name: 'Payment',
       component: Payment
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })

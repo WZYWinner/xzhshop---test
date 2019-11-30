@@ -6,9 +6,15 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VDistpicker from 'v-distpicker'
+import VueParticles from 'vue-particles'
+
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
 
 Vue.component('v-distpicker', VDistpicker)
 Vue.use(ElementUI)
+Vue.use(VueParticles)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

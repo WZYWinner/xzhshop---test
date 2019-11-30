@@ -1,7 +1,7 @@
 <template>
   <div class="top-header">
     <div class="container">
-      <a href="#" class="icon-mi"></a>
+      <!-- <a href="#" class="icon-mi"></a> -->
       <a href="#" class="pic-gif"></a>
       <div class="header-navs">
         <ul class="navs">
@@ -22,26 +22,7 @@
       </div>
 	  <div class="backHome" @click="backHome">首页</div>
       <div class="header-search">
-        <ul class="hot-word" transition="fadeOut" v-show="hotStatus">
-          <li class="hot-item" v-for="item in hotItems">{{item}}</li>
-        </ul>
-        <input
-          @focus="evtIptFocus"
-          @blur="evtIptBlur"
-          class="search-ipt"
-          type="search"
-          name="search"
-          value
-        />
-        <label class="search-btn" for="search">
-          <i class="icon-search"></i>
-        </label>
-        <ul class="search-result clearfix">
-          <li v-for="item in results">
-            <span class="item-name">{{item.name}}</span>
-            <span class="item-num">约有{{item.number}}件</span>
-          </li>
-        </ul>
+        <span @click="goRegister">注册</span>|<span>登录</span>
       </div>
     </div>
     <div
@@ -307,6 +288,9 @@ export default {
   },
   ready() {},
   methods: {
+    goRegister: function() {
+      this.$router.push('/register')
+    },
 	  backHome: function() {
 		  this.$router.push('/')
 	  },
@@ -401,13 +385,24 @@ export default {
   color: #ff6700;
 }
 
-.header-search {
+.header-search{
   position: absolute;
   top: 23px;
   right: 0;
-  width: 295px;
+  /* width: 295px; */
   height: 50px;
-  border: 1px solid #e0e0e0;
+  line-height: 50px;
+  /* border: 1px solid #e0e0e0; */
+}
+.header-search span:nth-child(1){
+  color: #777;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.header-search span:nth-child(2){
+  margin-left: 5px;
+  color: #ff5000;
+  cursor: pointer;
 }
 .hot-word {
   position: absolute;

@@ -5,7 +5,7 @@
 			  <ul>
 				 <li v-for="(item,index) in work" style="display:inline-block;font-size:15px;padding-left:15px;" :key="index">
 					 <span>{{item.name}}</span>
-					 <span v-show="$index!=8">|</span>
+					 <span v-show="index!=8">|</span>
 				 </li>
 			  </ul>
 		  </div>
@@ -22,8 +22,8 @@
 					<div class="price">价格:</div>
 					<div class="price-num">¥ {{(price*num).toFixed(2)}}</div>
 				</div>
-				<div style="text-decoration:line-through;color: #999;"><div class="goods-font">运费:&nbsp&nbsp&nbsp<span style="color: #280;">免运费</span></div></div>
-				<div class="goods-font">网络类型<span class="leixing" @click="choose" :class="{goodsActive : active === true}">4G+全网通</span></div>
+				<div style="text-decoration:line-through;color: #999;"><div class="goods-font">运费:<span style="color: #280;margin-left:40px">免运费</span></div></div>
+				<div class="goods-font">网络类型<span class="leixing">4G+全网通</span></div>
 				<div style="display:flex;margin-top:30px;">
 					<div class="goods-font">机身颜色</div>
 					<div class="jishen" v-for="(goods,index) in phoneInfo" :key="index" @click="chooseColor(index)" :class="{goodsActive : jishen === index}">
@@ -42,15 +42,7 @@
 
 					<button class="pay" @click="pay">立即购买</button>
 
-					<!-- <div class="jiesuan" v-show="isLock">
-						<div class="success">
-							<div class="tishi">
-								<img src="../assets/img/pay_success.png" alt="">
-								<span>购买成功</span>
-							</div>
-						<div class="close" @click="quxiao"><img src="../assets/img/close.png" alt=""></div>
-						</div>
-					</div> -->
+					
 			</div>
 			</div>
 			<div class="bottom">
@@ -156,7 +148,7 @@ export default {
 			this.num = ++this.num
 		},
 		pay: function () {
-			this.$router.push({name:'/payment',params: {img:this.phoneInfo[0].img,name:this.name,price:this.price,num:this.num}})
+			this.$router.push({name:'Payment',params: {img:this.phoneInfo[this.jishen].img,name:this.name,price:this.price,num:this.num}})
 		},
 		quxiao: function () {
 			this.isLock = false
@@ -291,7 +283,7 @@ export default {
     min-width: 10px;
     padding: 8px;
     text-align: center;
-    border: 1px solid #b8b7bd;
+    border: 2px solid #FF0036;
     color: #000;
     text-decoration: none;
 	cursor: pointer;

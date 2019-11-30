@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <top-header></top-header>
+    <top-header v-show="$route.name!=='Register'&&$route.name!=='Login'"></top-header>
     <!-- <top-banner></top-banner> -->
     <router-view/>
     <!-- <payment/> -->
-    <temp-footer></temp-footer>
+    <temp-footer v-show="$route.name!=='Register'&&$route.name!=='Login'"></temp-footer>
   </div>
 </template>
 

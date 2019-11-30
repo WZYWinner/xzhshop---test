@@ -104,9 +104,10 @@
 							<li class="link-item"><a href="javascript:void(0)">Select Region</a></li>
             </ul>-->
             <p class="explan-txt">
-              地址：福州市台江区鳌峰街道光明南路1号 升龙汇金20楼
-              <br />招商电话：400032688
-              <br />邮箱：fjkzhgj@fjkzh.cn
+              地址：福建省福州市仓山区螺洲镇杜园路18号海峡西岸国际物流商贸城（二期）16号楼9层04办公
+              <br />招商电话：13136280225
+              <br />邮箱：2013817414@qq.com
+              <br />福建省鑫飞拓智能科技有限公司  企业   闽ICP备19019636号-1 
             </p>
           </div>
           <img
